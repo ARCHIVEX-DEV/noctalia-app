@@ -76,10 +76,25 @@
 
     <!-- SCRIPT DIRECTEMENT DANS LA PAGE POUR LE TEST -->
     <script>
-        function chooseCharacter(name) {
-            alert("✅ Le bouton fonctionne ! Tu as choisi " + name);
+        <script>
+    function chooseCharacter(name) {
+        // Vérification de Telegram
+        if (!window.Telegram) {
+            alert("❌ Telegram n'est pas détecté !");
+            return;
         }
-    </script>
 
-</body>
-</html>
+        if (!window.Telegram.WebApp) {
+            alert("❌ Telegram WebApp n'est pas détecté !");
+            return;
+        }
+
+        const tg = window.Telegram.WebApp;
+
+        alert(
+            "✅ Telegram détecté !\n\n" +
+            "Personnage : " + name + "\n" +
+            "initData : " + (tg.initData ? "OUI" : "NON")
+        );
+    }
+</script>
