@@ -8,36 +8,23 @@ if (tg) {
 }
 
 function chooseCharacter(name) {
-    const cards = document.querySelectorAll(".character-card");
-
-    // Petite animation
-    cards.forEach((card) => {
-        card.style.opacity = "0.45";
-    });
-
     const character = name.toLowerCase();
 
-    // Vérifie que la page est bien ouverte dans Telegram
-    if (tg) {
+    // Vérifie que la Mini App est ouverte depuis Telegram
+    if (tg && tg.initData) {
         tg.sendData(JSON.stringify({
             action: "choose_character",
             character: character
         }));
 
-        // La Mini App se ferme après l'envoi
         setTimeout(() => {
             tg.close();
-        }, 300);
-
+        }, 500);
     } else {
-        // Test dans un navigateur normal
+        // Mode test dans un navigateur normal
         alert(
-            "Tu as choisi " + name +
-            ". Pour envoyer le choix au bot, ouvre la Mini App depuis Telegram."
+            "🌙 Tu as choisi " + name +
+            " !\n\nOuvre Noctalia depuis Telegram pour envoyer ton choix au bot."
         );
-
-        cards.forEach((card) => {
-            card.style.opacity = "1";
-        });
     }
 }
